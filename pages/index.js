@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 
@@ -45,6 +46,7 @@ export default function Home({ styles, pokeData }) {
         {pokeArr.map((pokeman, i) => {
           return (
             <div key={pokeman.name.english} className="p-4">
+              <Link href={`/pokemons/${pokeman.id}`}><a>
               <div className="bg-gray-200 py-4 px-6 rounded">
                 <img
                   src={pokeman.image.hires}
@@ -65,10 +67,10 @@ export default function Home({ styles, pokeData }) {
                   })}
                 </div>
                 <p className="text-center">
-                  <p className="font-semibold text-3xl mr-2">{`${pokeman.id}.`}</p>
-                  <p className="text-3xl">{pokeman.name.english}</p>
+                  <span className="font-semibold text-3xl mr-2">{`${pokeman.id}.`}</span>
+                  <span className="text-3xl">{pokeman.name.english}</span>
                 </p>
-              </div>
+              </div> </a></Link>
             </div>
           );
         })}
