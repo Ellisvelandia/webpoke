@@ -1,11 +1,46 @@
-import React, { useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 
 export default function Home({ styles, pokeData }) {
-  const [pokeArr, setPokeArr] = useState(pokeData.slice(0,20));
-  console.log(pokeArr);
+  const [pokeArr, setPokeArr] = useState(pokeData.slice(0, 20));
+  const [pageno, setPageno] = useState(0);
+  // console.log(pokeArr);
+  useEffect(() => {
+    setPokeArr(pokeData.slice(pageno * 20, pageno * 20 + 20));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageno]);
+
+  const handlePrev = () => {
+    setPageno((c) => {
+      return c - 1;
+    });
+  };
+
+  const handleNext = () => {
+    setPageno((c) => {
+      return c + 1;
+    });
+  };
+
   return (
     <Layout title={"WebPokedex"}>
+      <div className="container mx-auto flex flex-wrap justify-between mb-8">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded disable:bg-gray-700"
+          onClick={handlePrev}
+          disabled={pageno === 0 ? true : false}
+        >
+          Previous
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
+          onClick={handleNext}
+          disabled={pokeData.length / 20 - pageno < 1 ? true : false}
+        >
+          Next
+        </button>
+      </div>
       <div className="flex flex-wrap justify-center mx-auto">
         {pokeArr.map((pokeman, i) => {
           return (
@@ -22,10 +57,12 @@ export default function Home({ styles, pokeData }) {
                       <span
                         key={type}
                         className="text-white text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
-                        style={{backgroundColor:styles[type.toLowerCase()]}}>{type}</span>
-                    )
-                  })
-                }
+                        style={{ backgroundColor: styles[type.toLowerCase()] }}
+                      >
+                        {type}
+                      </span>
+                    );
+                  })}
                 </div>
                 <p className="text-center">
                   <p className="font-semibold text-3xl mr-2">{`${pokeman.id}.`}</p>
@@ -35,6 +72,22 @@ export default function Home({ styles, pokeData }) {
             </div>
           );
         })}
+      </div>
+      <div className="container mx-auto flex flex-wrap justify-between mb-8">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disable:bg-gray-700"
+          onClick={handlePrev}
+          disabled={pageno === 0 ? true : false}
+        >
+          Previous
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleNext}
+          disabled={pokeData.length / 20 - pageno < 1 ? true : false}
+        >
+          Next
+        </button>
       </div>
     </Layout>
   );
