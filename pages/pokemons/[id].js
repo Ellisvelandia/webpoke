@@ -52,27 +52,27 @@ const Details = ({ pokeman, styles }) => {
               let statColor;
               switch (stat) {
                 case "HP":
-                  statPercentFactor = 2.55;
+                  statPercentFactor = 4.55;
                   statColor = "#da4343";
                   break;
                 case "Attack":
-                  statPercentFactor = 1.81;
+                  statPercentFactor = 3.81;
                   statColor = "#f38d45";
                   break;
                 case "Defense":
-                  statPercentFactor = 2.3;
+                  statPercentFactor = 4.3;
                   statColor = "#f3d14a";
                   break;
                 case "Sp. Attack":
-                  statPercentFactor = 1.73;
+                  statPercentFactor = 3.73;
                   statColor = "#547fe4";
                   break;
                 case "Sp. Defense":
-                  statPercentFactor = 2.3;
+                  statPercentFactor = 4.3;
                   statColor = "#84df57";
                   break;
                 case "Speed":
-                  statPercentFactor = 2.0;
+                  statPercentFactor = 4.0;
                   statColor = "#f75887";
                   break;
               }
@@ -87,7 +87,7 @@ const Details = ({ pokeman, styles }) => {
                       className="h-4 rounded-full"
                       style={{
                         backgroundColor: statColor,
-                        width: parseInt(pokeman.base[stat])*statPercentFactor,
+                        width: parseInt(pokeman.base[stat]) * statPercentFactor,
                       }}
                     ></div>
                   </div>
